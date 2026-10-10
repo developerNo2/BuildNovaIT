@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="BuildNova IT builds modern websites, mobile experiences, and digital growth systems for ambitious businesses."
+    />
+    <title>BuildNova IT | Digital Growth Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #07111f;
+        --bg-soft: #0f1a2b;
+        --panel: rgba(15, 26, 43, 0.72);
+        --card: #f7f9ff;
+        --card-alt: #eef3ff;
+        --text: #eaf1ff;
+        --muted: #a9b9d4;
+        --primary: #6c7cff;
+        --secondary: #3ad7c6;
+        --accent: #c48dff;
+        --border: rgba(255, 255, 255, 0.1);
+        --shadow: 0 25px 60px rgba(31, 49, 79, 0.35);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: radial-gradient(circle at top left, rgba(108, 124, 255, 0.24), transparent 30%), radial-gradient(circle at bottom right, rgba(58, 215, 198, 0.18), transparent 30%), var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      button, input, textarea { font: inherit; }
+      .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+      .site-header {
+        position: sticky; top: 0; z-index: 20; backdrop-filter: blur(14px);
+        background: rgba(7, 17, 31, 0.72); border-bottom: 1px solid var(--border);
+      }
+      .nav-wrap { display: flex; align-items: center; justify-content: space-between; min-height: 80px; gap: 20px; }
+      .brand { display: inline-flex; align-items: center; gap: 0.75rem; font-weight: 700; letter-spacing: -0.04em; }
+      .brand-mark {
+        display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; box-shadow: var(--shadow);
+      }
+      .brand-text { font-size: 1.1rem; }
+      .main-nav { display: flex; align-items: center; gap: 28px; color: var(--muted); font-size: 0.96rem; }
+      .main-nav a { transition: color 0.2s ease; }
+      .main-nav a:hover, .main-nav a:focus-visible { color: var(--text); }
+      .button {
+        display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
+        padding: 0 22px; border-radius: 14px; font-weight: 600; border: 1px solid transparent; transition: transform 0.2s ease, box-shadow 0.2s ease; cursor: pointer;
+      }
+      .button:hover, .button:focus-visible { transform: translateY(-1px); }
+      .button-primary {
+        background: linear-gradient(135deg, var(--primary), #8c79ff); color: white;
+        box-shadow: 0 18px 35px rgba(108, 124, 255, 0.38);
+      }
+      .button-secondary {
+        background: rgba(255, 255, 255, 0.04); border-color: var(--border); color: var(--text);
+      }
+      .nav-toggle { display: none; width: 48px; height: 48px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 12px; padding: 0; cursor: pointer; }
+      .nav-toggle span { display: block; width: 22px; height: 2px; margin: 5px auto; background: white; border-radius: 10px; }
+      .hero { padding: 92px 0 56px; }
+      .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; align-items: center; gap: 42px; }
+      .eyebrow {
+        display: inline-block; margin-bottom: 16px; padding: 7px 12px; border-radius: 999px;
+        border: 1px solid rgba(122, 136, 255, 0.38); background: rgba(108, 124, 255, 0.08); color: #dfe6ff;
+        font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      }
+      .hero-copy h1 { margin: 0; font-size: clamp(2.8rem, 5vw, 5.1rem); line-height: 0.97; letter-spacing: -0.06em; max-width: 580px; }
+      .hero-copy p { max-width: 560px; margin: 22px 0 28px; color: var(--muted); font-size: 1.08rem; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+      .mini-proof { display: flex; flex-wrap: wrap; gap: 32px; }
+      .mini-proof div { display: flex; flex-direction: column; gap: 4px; }
+      .mini-proof strong { font-size: 1.6rem; letter-spacing: -0.06em; }
+      .mini-proof span { color: var(--muted); font-size: 0.8rem; }
+      .hero-visual { position: relative; min-height: 560px; display: grid; place-items: center; }
+      .dashboard-card {
+        position: relative; width: min(100%, 520px); padding: 18px 20px 20px; border-radius: 28px;
+        background: linear-gradient(180deg, rgba(11, 20, 35, 0.9), rgba(17, 29, 47, 0.9)); border: 1px solid var(--border); box-shadow: var(--shadow);
+      }
+      .card-top { display: flex; gap: 8px; margin-bottom: 22px; }
+      .dot { width: 10px; height: 10px; border-radius: 50%; display: block; }
+      .dot-red { background: #ff677d; }
+      .dot-yellow { background: #f7c457; }
+      .dot-green { background: #48d28f; }
+      .analytics { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; align-items: end; margin-bottom: 28px; }
+      .metric { display: flex; flex-direction: column; gap: 6px; }
+      .metric .label { color: var(--muted); font-size: 0.8rem; }
+      .metric strong { font-size: clamp(2rem, 3vw, 3rem); letter-spacing: -0.06em; }
+      .metric small { color: #7be7c9; }
+      .sparkline { height: 120px; display: flex; align-items: end; justify-content: space-between; gap: 8px; padding-bottom: 14px; }
+      .sparkline span { display: inline-block; width: 100%; border-radius: 999px 999px 0 0; background: linear-gradient(180deg, rgba(108, 124, 255, 0.8), rgba(58, 215, 198, 0.2)); }
+      .sparkline span:nth-child(1) { height: 30%; }
+      .sparkline span:nth-child(2) { height: 45%; }
+      .sparkline span:nth-child(3) { height: 50%; }
+      .sparkline span:nth-child(4) { height: 70%; }
+      .sparkline span:nth-child(5) { height: 80%; }
+      .sparkline span:nth-child(6) { height: 92%; }
+      .sparkline span:nth-child(7) { height: 100%; }
+      .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .stats-grid > div { padding: 16px 18px; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
+      .stats-grid span { display: block; color: var(--muted); font-size: 0.75rem; }
+      .stats-grid strong { display: block; margin-top: 8px; font-size: 1.5rem; letter-spacing: -0.05em; }
+      .floating-panel {
+        position: absolute; padding: 18px 20px; border-radius: 18px; background: rgba(10,16,28,0.92);
+        border: 1px solid var(--border); box-shadow: var(--shadow); min-width: 150px;
+      }
+      .floating-panel strong { display: block; margin-top: 8px; font-size: 1.9rem; letter-spacing: -0.06em; }
+      .floating-panel small, .panel-tag { color: var(--muted); }
+      .panel-left { left: -10px; bottom: 55px; }
+      .panel-right { right: -18px; top: 60px; }
+      .logo-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+      .logo-row {
+        display: grid; grid-template-columns: repeat(5, minmax(100px, 1fr)); gap: 18px; align-items: center; padding: 28px 0;
+        color: rgba(234, 241, 255, 0.65); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.75rem; text-align: center;
+      }
+      .section { padding: 110px 0; }
+      .alt-bg { background: rgba(255,255,255,0.02); }
+      .section-heading { max-width: 640px; margin-bottom: 40px; }
+      .section-heading h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.06em; }
+      .split-heading { display: flex; align-items: end; justify-content: space-between; max-width: none; gap: 18px; }
+      .text-link { color: #dfe6ff; font-weight: 600; }
+      .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+      .info-card { padding: 30px 22px 26px; border-radius: 24px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
+      .icon-wrap { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 18px; font-size: 1.5rem; font-weight: 700; margin-bottom: 18px; }
+      .icon-wrap.purple { background: rgba(196,141,255,0.15); color: #d8b5ff; }
+      .icon-wrap.blue { background: rgba(108,124,255,0.15); color: #bfc6ff; }
+      .icon-wrap.green { background: rgba(58,215,198,0.15); color: #9ef5e6; }
+      .icon-wrap.orange { background: rgba(255,173,76,0.15); color: #ffd69f; }
+      .info-card h3 { margin: 0 0 12px; font-size: 1.38rem; letter-spacing: -0.04em; }
+      .info-card p { margin: 0; color: var(--muted); }
+      .portfolio-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+      .portfolio-card { overflow: hidden; border-radius: 28px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
+      .thumb { height: 250px; background-size: cover; background-position: center; }
+      .thumb-a { background: linear-gradient(135deg, rgba(111,121,255,0.95), rgba(58,215,198,0.8)), linear-gradient(120deg, #dfe8ff, #eef2ff); }
+      .thumb-b { background: linear-gradient(135deg, rgba(82,199,171,0.85), rgba(62,119,255,0.9)), linear-gradient(160deg, #d4f8ff, #dfe9ff); }
+      .thumb-c { background: linear-gradient(135deg, rgba(132,102,255,0.85), rgba(255,174,76,0.8)), linear-gradient(135deg, #f4e0ff, #fff4db); }
+      .portfolio-body { padding: 22px 22px 26px; }
+      .portfolio-body span { color: var(--muted); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+      .portfolio-body h3 { margin: 12px 0 10px; font-size: 1.6rem; letter-spacing: -0.05em; }
+      .portfolio-body p { margin: 0; color: var(--muted); }
+      .process-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+      .process-step { position: relative; padding: 26px 22px; border-radius: 24px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
+      .process-step span { display: inline-block; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: #b3c0ff; }
+      .process-step h3 { margin: 0 0 12px; font-size: 1.4rem; letter-spacing: -0.04em; }
+      .process-step p { margin: 0; color: var(--muted); }
+      .testimonial-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+      .testimonial-card { margin: 0; padding: 30px 24px; border-radius: 26px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: #eaf1ff; font-size: 1.02rem; }
+      .testimonial-card footer { margin-top: 20px; display: flex; flex-direction: column; gap: 2px; }
+      .testimonial-card span { color: var(--muted); }
+      .cta-wrap { display: grid; grid-template-columns: 1fr 0.95fr; gap: 30px; align-items: center; padding: 32px 28px; border-radius: 32px; background: linear-gradient(135deg, rgba(108,124,255,0.18), rgba(58,215,198,0.1)); border: 1px solid rgba(255,255,255,0.08); }
+      .cta-copy h2 { margin: 0 0 12px; font-size: clamp(2.1rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.06em; }
+      .cta-copy p { margin: 0; color: var(--muted); }
+      .contact-form { display: grid; gap: 14px; background: rgba(8,15,24,0.42); border: 1px solid var(--border); padding: 20px; border-radius: 24px; }
+      .contact-form label { display: grid; gap: 8px; color: #edf2ff; font-weight: 600; }
+      .contact-form input, .contact-form textarea { width: 100%; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); color: var(--text); border-radius: 14px; padding: 13px 14px; resize: vertical; }
+      .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(234,241,255,0.45); }
+      .site-footer { padding: 28px 0 40px; border-top: 1px solid var(--border); }
+      .footer-wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+      .footer-links { display: flex; align-items: center; gap: 18px; color: var(--muted); }
+      .footer-wrap p { margin: 0; color: var(--muted); }
+
+      @media (max-width: 980px) {
+        .hero-grid, .cta-wrap, .process-grid, .card-grid, .portfolio-grid, .testimonial-grid { grid-template-columns: 1fr 1fr; }
+        .hero-grid, .cta-wrap { grid-template-columns: 1fr; }
+        .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .portfolio-grid, .testimonial-grid { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 760px) {
+        .nav-toggle { display: block; order: 2; }
+        .nav-cta { display: none; }
+        .main-nav {
+          position: absolute; left: 16px; right: 16px; top: calc(100% + 10px); padding: 18px; display: none; flex-direction: column; align-items: flex-start; background: rgba(7,17,31,0.96); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow);
+        }
+        .main-nav.is-open { display: flex; }
+        .hero { padding-top: 62px; }
+        .hero-copy h1 { font-size: 3rem; }
+        .mini-proof { gap: 18px 28px; }
+        .logo-row { grid-template-columns: repeat(2, minmax(120px, 1fr)); font-size: 0.68rem; }
+        .section { padding: 82px 0; }
+        .split-heading, .footer-wrap { flex-direction: column; align-items: flex-start; }
+        .footer-links { flex-wrap: wrap; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="#home" class="brand" aria-label="BuildNova IT home">
+          <span class="brand-mark">B</span>
+          <span class="brand-text">BuildNova IT</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
+          <a href="#testimonials">Reviews</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <a href="#contact" class="button button-primary nav-cta">Book a call</a>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Digital strategy • Design • Development</span>
+            <h1>We build websites that turn attention into growth.</h1>
+            <p>
+              BuildNova IT helps businesses stand out online with premium websites, brand
+              systems, and conversion-focused experiences that make customers trust and buy.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#contact" class="button button-primary">Get started</a>
+              <a href="#work" class="button button-secondary">View projects</a>
+            </div>
+
+            <div class="mini-proof">
+              <div>
+                <strong>120+</strong>
+                <span>Projects launched</span>
+              </div>
+              <div>
+                <strong>4.9/5</strong>
+                <span>Client satisfaction</span>
+              </div>
+              <div>
+                <strong>96%</strong>
+                <span>Retention rate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Digital growth dashboard preview">
+            <div class="dashboard-card main-card">
+              <div class="card-top">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+
+              <div class="analytics">
+                <div class="metric">
+                  <span class="label">Revenue</span>
+                  <strong>$94.2K</strong>
+                  <small>+38.7% this month</small>
+                </div>
+                <div class="sparkline" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+
+              <div class="stats-grid">
+                <div>
+                  <span>Leads</span>
+                  <strong>1,284</strong>
+                </div>
+                <div>
+                  <span>Sales</span>
+                  <strong>31%</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="floating-panel panel-left">
+              <span class="panel-tag">Conversion</span>
+              <strong>+186%</strong>
+              <small>Avg. uplift</small>
+            </div>
+
+            <div class="floating-panel panel-right">
+              <span class="panel-tag">Launch</span>
+              <strong>2.4x</strong>
+              <small>Faster delivery</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="logo-strip">
+        <div class="container logo-row" aria-label="Trusted by brands">
+          <span>Northstar</span>
+          <span>Vertex</span>
+          <span>Elevate</span>
+          <span>Summit</span>
+          <span>Bloom</span>
+        </div>
+      </section>
+
+      <section id="services" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">What we do</span>
+            <h2>Everything your brand needs to win online.</h2>
+          </div>
+
+          <div class="card-grid services-grid">
+            <article class="info-card">
+              <div class="icon-wrap purple">✦</div>
+              <h3>Brand & Messaging</h3>
+              <p>Sharper positioning, cleaner offers, and stronger value communication.</p>
+            </article>
+
+            <article class="info-card">
+              <div class="icon-wrap blue">▣</div>
+              <h3>Website Design</h3>
+              <p>High-converting, fast, mobile-first websites tailored to your business goals.</p>
+            </article>
+
+            <article class="info-card">
+              <div class="icon-wrap green">◎</div>
+              <h3>Development</h3>
+              <p>Custom builds, CMS integrations, and smooth user experiences that scale.</p>
+            </article>
+
+            <article class="info-card">
+              <div class="icon-wrap orange">✧</div>
+              <h3>SEO & Growth</h3>
+              <p>Search visibility, landing page optimization, and performance improvements.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" class="section alt-bg">
+        <div class="container">
+          <div class="section-heading split-heading">
+            <div>
+              <span class="eyebrow">Selected work</span>
+              <h2>Conversion-first experiences built to perform.</h2>
+            </div>
+            <a href="#contact" class="text-link">Start your project →</a>
+          </div>
+
+          <div class="portfolio-grid">
+            <article class="portfolio-card accent-one">
+              <div class="thumb thumb-a"></div>
+              <div class="portfolio-body">
+                <span>Finance brand</span>
+                <h3>Northstar Capital</h3>
+                <p>Repositioned the brand and increased inquiry volume through a faster funnel.</p>
+              </div>
+            </article>
+
+            <article class="portfolio-card accent-two">
+              <div class="thumb thumb-b"></div>
+              <div class="portfolio-body">
+                <span>Healthcare startup</span>
+                <h3>Bloom Health</h3>
+                <p>Delivered a patient-friendly experience and polished trust-building design.</p>
+              </div>
+            </article>
+
+            <article class="portfolio-card accent-three">
+              <div class="thumb thumb-c"></div>
+              <div class="portfolio-body">
+                <span>E-commerce</span>
+                <h3>Summit Supply</h3>
+                <p>Improved product discovery and reduced drop-offs with a cleaner storefront.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="process" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">How we work</span>
+            <h2>A clear path from strategy to launch.</h2>
+          </div>
+
+          <div class="process-grid">
+            <div class="process-step">
+              <span>01</span>
+              <h3>Discover</h3>
+              <p>We learn your goals, audience, positioning, and the friction slowing your growth.</p>
+            </div>
+            <div class="process-step">
+              <span>02</span>
+              <h3>Design</h3>
+              <p>We shape a high-impact visual system and page architecture built around clarity.</p>
+            </div>
+            <div class="process-step">
+              <span>03</span>
+              <h3>Develop</h3>
+              <p>We build responsive, performant experiences with clean code and thoughtful UX.</p>
+            </div>
+            <div class="process-step">
+              <span>04</span>
+              <h3>Optimize</h3>
+              <p>We refine conversion paths, analytics, and user behavior for stronger results.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" class="section alt-bg">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">Client feedback</span>
+            <h2>Trusted by founders and growth teams.</h2>
+          </div>
+
+          <div class="testimonial-grid">
+            <blockquote class="testimonial-card">
+              “BuildNova IT gave us a site that finally matched the quality of our service. It feels premium and performs even better.”
+              <footer>
+                <strong>Priya Shah</strong>
+                <span>Founder, Elevate Labs</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="testimonial-card">
+              “They simplified our messaging, improved conversion flow, and made the launch feel effortless from start to finish.”
+              <footer>
+                <strong>Marcus Lee</strong>
+                <span>CMO, Meridian Group</span>
+              </footer>
+            </blockquote>
+
+            <blockquote class="testimonial-card">
+              “The team understood both design and business priorities. Our new website now supports the growth we were aiming for.”
+              <footer>
+                <strong>Amelia Ross</strong>
+                <span>Director, Vertex Studio</span>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section cta-section">
+        <div class="container cta-wrap">
+          <div class="cta-copy">
+            <span class="eyebrow">Let’s build something great</span>
+            <h2>Ready to become the brand people remember?</h2>
+            <p>Tell us what you need and we’ll map the next step toward your next level of growth.</p>
+          </div>
+
+          <form class="contact-form" id="contactForm">
+            <label>
+              Name
+              <input type="text" name="name" placeholder="Your name" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="you@company.com" required />
+            </label>
+            <label>
+              Project details
+              <textarea name="message" rows="4" placeholder="Tell us about your project..." required></textarea>
+            </label>
+            <button type="submit" class="button button-primary" aria-label="Send project inquiry">
+              Send inquiry
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <div>
+          <a href="#home" class="brand footer-brand">
+            <span class="brand-mark">B</span>
+            <span class="brand-text">BuildNova IT</span>
+          </a>
+        </div>
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <p>© <span id="year"></span> BuildNova IT</p>
+      </div>
+    </footer>
+
+    <script>
+      const navToggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('.main-nav');
+      const contactForm = document.getElementById('contactForm');
+      const yearNode = document.getElementById('year');
+
+      if (yearNode) {
+        yearNode.textContent = new Date().getFullYear();
+      }
+
+      if (navToggle && nav) {
+        navToggle.addEventListener('click', () => {
+          const isOpen = nav.classList.toggle('is-open');
+          navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        nav.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            nav.classList.remove('is-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+
+          const submitButton = contactForm.querySelector('button[type="submit"]');
+          const originalText = submitButton.textContent;
+
+          submitButton.textContent = 'Message sent';
+          submitButton.disabled = true;
+          contactForm.reset();
+
+          window.setTimeout(() => {
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+          }, 2200);
+        });
+      }
+    </script>
+  </body>
+</html>
