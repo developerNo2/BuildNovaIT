@@ -143,17 +143,16 @@
       .text-link { color: #dfe6ff; font-weight: 600; }
       .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
       .info-card { padding: 30px 22px 26px; border-radius: 24px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
-      .info-card, .portfolio-card, .process-step, .support-card { transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease; }
-      .info-card:hover, .portfolio-card:hover, .process-step:hover, .support-card:hover {
-        transform: translateY(-4px); border-color: rgba(58, 215, 198, 0.28);
-        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+      .info-card, .portfolio-card, .process-step, .support-card {
+        transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease;
       }
       .icon-wrap { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 18px; font-size: 1.5rem; font-weight: 700; margin-bottom: 18px; }
       .icon-wrap.purple { background: rgba(196,141,255,0.15); color: #d8b5ff; }
       .icon-wrap.blue { background: rgba(108,124,255,0.15); color: #bfc6ff; }
       .icon-wrap.green { background: rgba(58,215,198,0.15); color: #9ef5e6; }
       .icon-wrap.orange { background: rgba(255,173,76,0.15); color: #ffd69f; }
-      .info-card h3 { margin: 0 0 12px; font-size: 1.38rem; letter-spacing: -0.04em; }
+      .icon-wrap { transition: transform 0.28s ease, box-shadow 0.28s ease; }
+      .info-card h3 { margin: 0 0 12px; font-size: 1.38rem; letter-spacing: -0.04em; transition: color 0.25s ease; }
       .info-card p { margin: 0; color: var(--muted); }
       .portfolio-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
       .portfolio-card { overflow: hidden; border-radius: 28px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
@@ -226,6 +225,32 @@
         transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.22s ease, box-shadow 0.22s ease;
       }
       html.motion-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      html.motion-ready .info-card.reveal.is-visible:hover,
+      html.motion-ready .info-card.reveal.is-visible:focus-within,
+      html.motion-ready .portfolio-card.reveal.is-visible:hover,
+      html.motion-ready .portfolio-card.reveal.is-visible:focus-within,
+      html.motion-ready .process-step.reveal.is-visible:hover,
+      html.motion-ready .process-step.reveal.is-visible:focus-within,
+      html.motion-ready .support-card.reveal.is-visible:hover,
+      html.motion-ready .support-card.reveal.is-visible:focus-within {
+        transform: translateY(-8px) scale(1.02);
+      }
+      .info-card:hover, .info-card:focus-within,
+      .portfolio-card:hover, .portfolio-card:focus-within,
+      .process-step:hover, .process-step:focus-within,
+      .support-card:hover, .support-card:focus-within {
+        position: relative;
+        z-index: 1;
+        transform: translateY(-8px) scale(1.02);
+        border-color: rgba(58, 215, 198, 0.62);
+        background-color: rgba(58, 215, 198, 0.07);
+        box-shadow: 0 22px 48px rgba(0, 0, 0, 0.28), 0 0 24px rgba(58, 215, 198, 0.16);
+      }
+      .info-card:hover h3, .info-card:focus-within h3 { color: var(--secondary); }
+      .info-card:hover .icon-wrap, .info-card:focus-within .icon-wrap {
+        transform: translateY(-3px) rotate(-4deg) scale(1.08);
+        box-shadow: 0 8px 22px rgba(108, 124, 255, 0.22);
+      }
       .services-grid > :nth-child(2),
       .portfolio-grid > :nth-child(2),
       .process-grid > :nth-child(2),
@@ -305,7 +330,7 @@
       <section class="hero">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <span class="eyebrow">Claude • AI agents • Reusable skills</span>
+            <span class="eyebrow">AI agents • Reusable skills</span>
             <h1>Build AI agents <span class="hero-highlight">that work beyond the demo.</span></h1>
             <p>
               BuildNova IT is exploring specialized Claude agents and reusable skills that
