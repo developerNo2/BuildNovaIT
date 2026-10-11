@@ -184,6 +184,59 @@
       .footer-links { display: flex; align-items: center; gap: 18px; color: var(--muted); }
       .footer-wrap p { margin: 0; color: var(--muted); }
 
+      @keyframes rise-in {
+        from { opacity: 0; transform: translateY(22px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      @keyframes grow-bar {
+        from { transform: scaleY(0); opacity: 0.35; }
+        to { transform: scaleY(1); opacity: 1; }
+      }
+      .hero-copy > * { animation: rise-in 0.7s both; }
+      .hero-copy > :nth-child(2) { animation-delay: 0.1s; }
+      .hero-copy > :nth-child(3) { animation-delay: 0.18s; }
+      .hero-copy > :nth-child(4) { animation-delay: 0.26s; }
+      .hero-copy > :nth-child(5) { animation-delay: 0.34s; }
+      .hero-visual { animation: rise-in 0.8s 0.16s both; }
+      .panel-left { animation: float 5s ease-in-out 0.8s infinite; }
+      .panel-right { animation: float 5s ease-in-out 1.5s infinite; }
+      .sparkline span {
+        transform-origin: bottom;
+        animation: grow-bar 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
+      .sparkline span:nth-child(2) { animation-delay: 0.12s; }
+      .sparkline span:nth-child(3) { animation-delay: 0.24s; }
+      .sparkline span:nth-child(4) { animation-delay: 0.36s; }
+      .sparkline span:nth-child(5) { animation-delay: 0.48s; }
+      .sparkline span:nth-child(6) { animation-delay: 0.6s; }
+      .sparkline span:nth-child(7) { animation-delay: 0.72s; }
+      .thumb { transition: transform 0.45s ease; }
+      .portfolio-card:hover .thumb { transform: scale(1.035); }
+      .button:active { transform: translateY(0) scale(0.98); }
+      .main-nav a, .footer-links a, .text-link { transition: color 0.2s ease; }
+      .footer-links a:hover, .footer-links a:focus-visible, .text-link:hover, .text-link:focus-visible { color: var(--secondary); }
+
+      html.motion-ready .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+      }
+      html.motion-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      .services-grid > :nth-child(2),
+      .portfolio-grid > :nth-child(2),
+      .process-grid > :nth-child(2),
+      .support-grid > :nth-child(2) { transition-delay: 0.1s; }
+      .services-grid > :nth-child(3),
+      .portfolio-grid > :nth-child(3),
+      .process-grid > :nth-child(3),
+      .support-grid > :nth-child(3) { transition-delay: 0.2s; }
+      .services-grid > :nth-child(4),
+      .process-grid > :nth-child(4) { transition-delay: 0.3s; }
+
       @media (max-width: 980px) {
         .hero-grid, .cta-wrap, .process-grid, .card-grid, .portfolio-grid, .support-grid { grid-template-columns: 1fr 1fr; }
         .hero-grid, .cta-wrap { grid-template-columns: 1fr; }
@@ -211,7 +264,11 @@
 
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
-        *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+        *, *::before, *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation: none !important;
+        }
       }
     </style>
   </head>
@@ -569,6 +626,26 @@
       const contactForm = document.getElementById('contactForm');
       const formStatus = document.getElementById('formStatus');
       const yearNode = document.getElementById('year');
+
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const revealItems = document.querySelectorAll(
+          '.logo-row, .section-heading, .info-card, .portfolio-card, .process-step, .support-card, .cta-copy, .contact-form'
+        );
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.14, rootMargin: '0px 0px -32px 0px' });
+
+        revealItems.forEach((item) => {
+          item.classList.add('reveal');
+          revealObserver.observe(item);
+        });
+        document.documentElement.classList.add('motion-ready');
+      }
 
       if (yearNode) {
         yearNode.textContent = "2024";
